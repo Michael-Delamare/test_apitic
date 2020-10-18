@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Personnage;
+use App\Models\Classe;
+use App\Models\Specialisation;
 use Illuminate\Http\Request;
 
 class PersonnageController extends Controller
@@ -14,7 +16,7 @@ class PersonnageController extends Controller
      */
     public function index()
     {
-        $personnage = Personnage::get();
+        $personnage = Personnage::with('specialisation')->get();
         return view('accueil',[
             'personnages'=>$personnage,
         ]);
@@ -28,7 +30,10 @@ class PersonnageController extends Controller
      */
     public function create()
     {
-        //
+        $personnage = Personnage::get();
+        $classe = Classe::get();
+        $specialisation = Specialisation::get();
+        return view('create',['personnages'=>$personnage,'classes'=>$classe,'specialisations'=>$specialisation]);
     }
 
     /**
@@ -39,7 +44,13 @@ class PersonnageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $personnage = new personnage;
+        $personnage->pseudo = $request->pseudo;
+        $personnage->race = $request->race;
+        $personnage->proprietaire = $request->proprietaire;
+        $personnage->specialisation_id = $request->nom_specialisation;
+        $personnage->save();
+        return redirect()->route('personnage.index');
     }
 
     /**
@@ -82,8 +93,10 @@ class PersonnageController extends Controller
      * @param  \App\Models\Personnage  $personnage
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Personnage $personnage)
+    public function destroy($id)
     {
-        //
+        $personnage = Personnage::find($id);
+        $personnage->delete();
+        return redirect()->route('personnage.index');
     }
 }

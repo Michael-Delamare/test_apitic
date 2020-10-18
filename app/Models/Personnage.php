@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Personnage extends Model
 {
     protected $fillable = [
-        'pseudo', 'race', 'armure', 'proprietaire', 'specialisation_id'
+        'pseudo', 'race', 'proprietaire', 'specialisation_id'
     ];
 
+    //protected $guarded = [];
+
     public function specialisation() {
-        return $this->hasOne('App\Models\Specialisation');
+        return $this->belongsTo('App\Models\Specialisation');
     }
 }

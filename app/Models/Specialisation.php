@@ -11,10 +11,12 @@ class Specialisation extends Model
         'nom_specialisation', 'classe_id',
     ];
 
+    protected $with = ['classe'];
+
     public function personnages() {
-        return $this->belongsTo('App\Models\Personnage');
+        return $this->hasOne('App\Models\Personnage');
     }
-    public function classes(){
-        return $this->hasOne('App\Models\Classe');
+    public function classe(){
+        return $this->belongsTo('App\Models\Classe');
     }
 }

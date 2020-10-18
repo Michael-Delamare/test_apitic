@@ -1,5 +1,7 @@
 <?php
 use App\Http\Controllers\PersonnageController;
+use App\Http\Controllers\ClasseController;
+use App\Http\Controllers\SpecialisationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,3 +20,6 @@ Route::get('/', function () {
 });
 
 Route::resource('/personnage', PersonnageController::class);
+Route::resource('/classe', ClasseController::class);
+Route::resource('/specialisation', SpecialisationController::class);
+Route::get('/selecteur/specialisation', [SpecialisationController::class, 'changeSelecteur']);

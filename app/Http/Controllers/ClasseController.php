@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\Controller;
 use App\Models\Classe;
 use Illuminate\Http\Request;
 
@@ -14,8 +14,12 @@ class ClasseController extends Controller
      */
     public function index()
     {
-        //
+        $classe = Classe::get();
+        return view('accueil',[
+            'classes'=>$classe,
+        ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -24,7 +28,8 @@ class ClasseController extends Controller
      */
     public function create()
     {
-        //
+        $classe = Classe::get();
+        return view('create',['classes'=>$classe]);
     }
 
     /**
@@ -35,7 +40,14 @@ class ClasseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData= $request -> validate([
+            'nom_classe'=> 'required|min:3',
+            'armure' => 'required',
+            'point_de_vie' => 'required',
+         ]);
+         $classe = Classe::create($validatedData);
+         $classe->save();
+         return redirect()->route('personnage.index');
     }
 
     /**

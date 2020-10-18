@@ -17,7 +17,6 @@ class CreatePersonnagesTable extends Migration
             $table->id();
             $table->string('pseudo');
             $table->string('race');
-            $table->string('armure');
             $table->string('proprietaire');
             $table->foreignId('specialisation_id')->constrained();
             $table->timestamps();

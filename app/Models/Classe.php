@@ -12,6 +12,6 @@ class Classe extends Model
     ];
 
     public function specialisations() {
-        return $this->belongsTo('App\Models\Specialisation');
+        return $this->hasOne('App\Models\Specialisation');
     }
 }

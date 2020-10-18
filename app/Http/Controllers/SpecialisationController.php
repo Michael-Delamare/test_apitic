@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\Controller;
 use App\Models\Specialisation;
 use Illuminate\Http\Request;
 
@@ -14,7 +14,16 @@ class SpecialisationController extends Controller
      */
     public function index()
     {
-        //
+        $specialisation = Specialisation::get();
+        return view('accueil',[
+            'specialisations'=>$specialisation,
+        ]);
+    }
+
+
+    public function changeSelecteur(Request $request){
+            $specialisation = Specialisation::where('classe_id',$request->data)->get();
+            return ['specialisation'=>$specialisation];
     }
 
     /**
@@ -24,7 +33,8 @@ class SpecialisationController extends Controller
      */
     public function create()
     {
-        //
+        $specialisation = Specialisation::get();
+        return view('create',['specialisations'=>$specialisation]);
     }
 
     /**
@@ -35,7 +45,12 @@ class SpecialisationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData= $request -> validate([
+            'nom_specialisation'=> 'required|min:3',
+         ]);
+         $specialisation = Specialisation::create($validatedData);
+         $specialisation->save();
+         return redirect()->route('personnage.index');
     }
 
     /**
