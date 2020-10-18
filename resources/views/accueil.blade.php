@@ -33,7 +33,7 @@
             <th scope="row"></th>
             <th scope="row">{{$personnage->proprietaire}}</th>
             <th scope="row">
-                <a href="{{route("personnage.edit",["personnage"=>$personnage->id])}}" class="btn btn-success">Modifier</a>
+                <a href="{{route("personnage.edit",$personnage->id)}}" class="btn btn-success">Modifier</a>
                 <form action="{{route('personnage.destroy',$personnage->id)}}" method="post">
                     @csrf
                     {{method_field('DELETE')}}

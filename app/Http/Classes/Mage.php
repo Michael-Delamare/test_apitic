@@ -1,5 +1,5 @@
 <?php
-
+namespace App\Http\Classes;
 class Mage {
     public $pseudo;
     public $race;
@@ -14,6 +14,9 @@ class Mage {
 
     public function murmure_de_magie(){
         return "Je suis un mage avec la spécialisation".$this->specialisation;
+    }
+    public function detail(){
+        return "Je suis un Mage et mon sort préféré est Murmure de Magie";
     }
 
 }

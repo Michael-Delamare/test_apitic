@@ -5,6 +5,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Personnage;
 use App\Models\Classe;
 use App\Models\Specialisation;
+use App\Http\Classes\Chasseur;
+use App\Http\Classes\Guerrier;
+use App\Http\Classes\Mage;
+use App\Http\Classes\Pretre;
 use Illuminate\Http\Request;
 
 class PersonnageController extends Controller
@@ -48,7 +52,7 @@ class PersonnageController extends Controller
         $personnage->pseudo = $request->pseudo;
         $personnage->race = $request->race;
         $personnage->proprietaire = $request->proprietaire;
-        $personnage->specialisation_id = $request->nom_specialisation;
+        $personnage->specialisation_id = $request->specialisation_id;
         $personnage->save();
         return redirect()->route('personnage.index');
     }
@@ -70,9 +74,12 @@ class PersonnageController extends Controller
      * @param  \App\Models\Personnage  $personnage
      * @return \Illuminate\Http\Response
      */
-    public function edit(Personnage $personnage)
+    public function edit($id)
     {
-        //
+        $personnage = Personnage::find($id);
+        $classe = Classe::get();
+        $specialisations = Specialisation::get();
+        return view('edit',["personnages"=>$personnage,"specialisations"=>$specialisations,"classes"=>$classe]);
     }
 
     /**
@@ -82,9 +89,15 @@ class PersonnageController extends Controller
      * @param  \App\Models\Personnage  $personnage
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Personnage $personnage)
+    public function update(Request $request, $id)
     {
-        //
+        $personnage = Personnage::findOrFail($id);
+        $personnage->pseudo = $request->pseudo;
+        $personnage->race = $request->race;
+        $personnage->proprietaire = $request->proprietaire;
+        $personnage->specialisation_id = $request->specialisation_id;
+        $personnage->save();
+        return redirect()->route('personnage.index');
     }
 
     /**

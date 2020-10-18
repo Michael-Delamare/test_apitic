@@ -1,5 +1,5 @@
 <?php
-
+namespace App\Http\Classes;
 class Guerrier {
     public $pseudo;
     public $race;
@@ -14,6 +14,9 @@ class Guerrier {
 
     public function cri_de_guerre(){
         return "Je suis un guerrier avec la spécialisation".$this->specialisation;
+    }
+    public function detail(){
+        return "Je suis un Guerrier et mon coup préféré est Cri de Guerre";
     }
 
 }

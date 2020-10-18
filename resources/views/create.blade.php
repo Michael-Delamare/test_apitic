@@ -51,8 +51,8 @@
                  @endforeach
              </select>
              <h2 id="titreSpecialisation" style="display: none;">Spécialisation</h2>
-             <select class="form-control linked-select" name="nom_specialisation" id="specialisation" style="display: none;">
-                 <option>Selectionner une spécialisation</option>
+             <select class="form-control linked-select" name="specialisation_id" id="specialisation" style="display: none;">
+             <option>Selectionner une spécialisation</option>
              </select>
              <div class="form-group">
                  <button type="submit" class="btn btn-primary">Envoyer</button>

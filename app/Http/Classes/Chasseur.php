@@ -1,5 +1,5 @@
 <?php
-
+namespace App\Http\Classes;
 class Chasseur {
     public $pseudo;
     public $race;
@@ -14,6 +14,9 @@ class Chasseur {
 
     public function hurelement_de_la_bete(){
         return "Je suis un chasseur avec la spécialisation".$this->specialisation;
+    }
+    public function detail(){
+        return "Je suis un Chasseur et mon coup préféré est Hurlement de la Bête";
     }
 
 }

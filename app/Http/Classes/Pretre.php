@@ -1,5 +1,6 @@
 <?php
-
+namespace App\Http\Classes;
+use App\Personnage;
 class Pretre {
     public $pseudo;
     public $race;
@@ -14,6 +15,9 @@ class Pretre {
 
     public function hymne_divin(){
         return "Je suis un prêtre avec la spécialisation".$this->specialisation;
+    }
+    public function detail(){
+        return "Je suis un Prêtre et mon soins préféré est Hymne Divin";
     }
 
 }
