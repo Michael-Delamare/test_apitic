@@ -102,6 +102,7 @@ class PersonnageController extends Controller
      */
     public function store(Request $request)
     {
+        
         $personnage = new personnage;
         $personnage->pseudo = $request->pseudo;
         $personnage->race = $request->race;

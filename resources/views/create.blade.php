@@ -25,19 +25,19 @@
                          <h2>Pseudo</h2>
                      </div>
                      <div class="form-group">
-                         <input type="text" class="form-control" placeholder="Entrez le pseudo" name="pseudo">
+                         <input type="text" class="form-control" placeholder="Entrez le pseudo" name="pseudo" required>
                      </div>
                      <div>
                          <h2>Propriétaire</h2>
                      </div>
                      <div class="form-group">
                          <input type="text" class="form-control" placeholder="Entrez le nom du propriétaire"
-                             name="proprietaire">
+                             name="proprietaire" required>
                      </div>
                      <div>
                          <h2>Race</h2>
                      </div>
-                     <select class="form-control" name="race">
+                     <select class="form-control" name="race" required>
                          <option>Selectionner une race</option>
                          <option>Humain</option>
                          <option>Elfe</option>
@@ -47,7 +47,7 @@
                      <div>
                          <h2 class="mt-3">Classe</h2>
                      </div>
-                     <select class="form-control" name="nom_classe" id="classe" data-target="#specialisation">
+                     <select class="form-control" name="nom_classe" id="classe" data-target="#specialisation" required>
                          <option>Selectionner une classe</option>
                          @foreach($classes as $classe)
                          <option value={{$classe->id}}>{{$classe->nom_classe}}</option>
@@ -55,7 +55,7 @@
                      </select>
                      <h2 class="mt-3" id="titreSpecialisation" style="display: none;">Spécialisation</h2>
                      <select class="form-control linked-select" name="specialisation_id" id="specialisation"
-                         style="display: none;">
+                         style="display: none;" required>
                          <option>Selectionner une spécialisation</option>
                      </select>
                      <div class="form-group mt-5 text-center">

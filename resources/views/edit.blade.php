@@ -26,19 +26,19 @@
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Entrez le pseudo" name="pseudo"
-                            value="{{$personnages->pseudo}}">
+                            value="{{$personnages->pseudo}}" required>
                     </div>
                     <div>
                         <h2>Propriétaire</h2>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Entrez le nom du propriétaire"
-                            value="{{$personnages->proprietaire}}" name="proprietaire">
+                            value="{{$personnages->proprietaire}}" name="proprietaire" required>
                     </div>
                     <div>
                         <h2>Race</h2>
                     </div>
-                    <select class="form-control" name="race" value="{{$personnages->race}}">
+                    <select class="form-control" name="race" value="{{$personnages->race}}" required>
                         <option>{{$personnages->race}}</option>
                         <option value="Humain">Humain</option>
                         <option value="Elfe">Elfe</option>
@@ -49,9 +49,7 @@
                         <h2 class="mt-3">Classe</h2>
                     </div>
                     <select class="form-control" name="nom_classe" id="classe"
-                        value=" {{$personnages->specialisation->classe->nom_classe}} ">
-                        <option value=" {{$personnages->specialisation->classe->nom_classe}}">Selectionner une classe
-                        </option>
+                        value=" {{$personnages->specialisation->classe->nom_classe}} " required>
                         @foreach($classes as $classe)
                         <option value={{$classe->id}}
                             {{$personnages->specialisation->classe_id==$classe->id?"selected":''}}>
@@ -59,7 +57,7 @@
                         @endforeach
                     </select>
                     <h2 class="mt-3" id="titreSpecialisation">Spécialisation</h2>
-                    <select class="form-control linked-select" name="specialisation_id" id="specialisation">
+                    <select class="form-control linked-select" name="specialisation_id" id="specialisation" required>
                         @foreach($specialisations as $specialisation)
                         @if($personnages->specialisation->classe_id == $specialisation->classe->id)
                         <option value="{{$specialisation->id}}"
@@ -67,7 +65,6 @@
                             {{$specialisation->nom_specialisation}}</option>
                         @endif
                         @endforeach
-                        <option>Selectionner une spécialisation</option>
                     </select>
 
                     <div class="form-group text-center mt-5">
