@@ -20,11 +20,46 @@ class PersonnageController extends Controller
      */
     public function index()
     {
-        $personnage = Personnage::with('specialisation')->get();
+        $personnages = Personnage::with('specialisation')->get();
+        $personnages = $this->donneeClasse($personnages);
         return view('accueil',[
-            'personnages'=>$personnage,
+            'personnages'=>$personnages,
         ]);
 
+    }
+
+    public static function couleurTom($personnage){
+        if($personnage->proprietaire == 'Tom'){
+            $Nstring = str_split ($personnage->pseudo,1);
+            foreach ($Nstring as $value) {
+                $str= "rgb(".rand(0,200).",".rand(0,200).",".rand(0,200).")";
+                echo "<b style='color:".$str.";'>".$value."</b>";
+        }}
+        else{
+            echo "<p>".$personnage->pseudo."</p>";
+        }
+    }
+
+    public function donneeClasse($personnages){
+        foreach ($personnages as $personnage) {
+            $classe = $personnage->specialisation->classe->nom_classe;
+            $chemin = "App\\Http\\Classes\\".$classe;
+            $donneeClasse = new $chemin($personnage);
+            $personnage->donneeClasse = $donneeClasse;
+        }
+        return $personnages;
+    }
+
+    public function tpc(){
+        $personnages = Personnage::with('specialisation')->join('specialisations', 'personnages.specialisation_id', '=', 'specialisations.id')->orderBy('classe_id')->get();
+        $personnages = $this->donneeClasse($personnages);
+        return view('accueil',['personnages'=>$personnages]);
+    }
+
+    public function tps(){
+        $personnages = Personnage::with('specialisation')->orderBy('specialisation_id')->get();
+        $personnages = $this->donneeClasse($personnages);
+        return view('accueil',['personnages'=>$personnages]);
     }
 
     /**

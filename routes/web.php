@@ -20,6 +20,8 @@ Route::get('/', function () {
 });
 
 Route::resource('/personnage', PersonnageController::class);
+Route::get('/tri_par_classe',[PersonnageController::class, 'tpc'])->name('personnage.tpc');
+Route::get('/tri_par_specialisation',[PersonnageController::class, 'tps'])->name('personnage.tps');
 Route::resource('/classe', ClasseController::class);
 Route::resource('/specialisation', SpecialisationController::class);
 Route::get('/selecteur/specialisation', [SpecialisationController::class, 'changeSelecteur']);

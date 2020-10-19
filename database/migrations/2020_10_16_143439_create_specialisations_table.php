@@ -16,6 +16,7 @@ class CreateSpecialisationsTable extends Migration
         Schema::create('specialisations', function (Blueprint $table) {
             $table->id();
             $table->string('nom_specialisation');
+            $table->string('icone');
             $table->foreignId('classe_id')->constrained();
             $table->timestamps();
         });

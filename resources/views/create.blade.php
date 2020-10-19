@@ -51,8 +51,9 @@
                  @endforeach
              </select>
              <h2 id="titreSpecialisation" style="display: none;">Spécialisation</h2>
-             <select class="form-control linked-select" name="specialisation_id" id="specialisation" style="display: none;">
-             <option>Selectionner une spécialisation</option>
+             <select class="form-control linked-select" name="specialisation_id" id="specialisation"
+                 style="display: none;">
+                 <option>Selectionner une spécialisation</option>
              </select>
              <div class="form-group">
                  <button type="submit" class="btn btn-primary">Envoyer</button>
@@ -61,32 +62,36 @@
      </div>
 
      <script>
-        var classe = document.getElementById('classe');
-        var specialisation = document.getElementById('specialisation');
-        var titreSpecialisation = document.getElementById('titreSpecialisation');
+         var classe = document.getElementById('classe');
+         var specialisation = document.getElementById('specialisation');
+         var titreSpecialisation = document.getElementById('titreSpecialisation');
 
-        classe.addEventListener('change', function (e){
-            e.preventDefault();
-            axios.get('/selecteur/specialisation',{params:{data:this.value}})
-                .then(function (reponse) {
-                    //console.log(reponse.data.specialisation);
-                    selectSpecialisation(reponse.data.specialisation);
-                })
-                .catch(function (erreur) {
-                    console.log(erreur);
-                });
-        })
-        function selectSpecialisation(responseTableau){
-            titreSpecialisation.style.display = null;
-            specialisation.style.display = null;
-            specialisation.innerHTML = '';
-            for(i=0;i<responseTableau.length;i++){
-                specialisation.innerHTML +=  '<option value="'+responseTableau[i]['id']+'">'+responseTableau[i]['nom_specialisation']+'</option>';
-            }
-        }
+         classe.addEventListener('change', function (e) {
+             e.preventDefault();
+             axios.get('/selecteur/specialisation', {
+                     params: {
+                         data: this.value
+                     }
+                 })
+                 .then(function (reponse) {
+                     //console.log(reponse.data.specialisation);
+                     selectSpecialisation(reponse.data.specialisation);
+                 })
+                 .catch(function (erreur) {
+                     console.log(erreur);
+                 });
+         })
 
-
-
+         function selectSpecialisation(responseTableau) {
+             titreSpecialisation.style.display = null;
+             specialisation.style.display = null;
+             specialisation.innerHTML = '';
+             for (i = 0; i < responseTableau.length; i++) {
+                 specialisation.innerHTML += '<option value="' + responseTableau[i]['id'] + '">' + responseTableau[i][
+                     'nom_specialisation'
+                 ] + '</option>';
+             }
+         }
 
      </script>
 

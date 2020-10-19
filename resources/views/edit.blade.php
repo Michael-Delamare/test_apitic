@@ -50,8 +50,7 @@
                 value=" {{$personnages->specialisation->classe->nom_classe}} ">
                 <option value=" {{$personnages->specialisation->classe->nom_classe}}">Selectionner une classe</option>
                 @foreach($classes as $classe)
-                <option value={{$classe->id}}
-                    {{$personnages->specialisation->classe_id==$classe->id?"selected":''}}>
+                <option value={{$classe->id}} {{$personnages->specialisation->classe_id==$classe->id?"selected":''}}>
                     {{$classe->nom_classe}}</option>
                 @endforeach
             </select>
@@ -59,7 +58,8 @@
             <select class="form-control linked-select" name="specialisation_id" id="specialisation">
                 @foreach($specialisations as $specialisation)
                 @if($personnages->specialisation->classe_id == $specialisation->classe->id)
-                <option value="{{$specialisation->id}}" {{$personnages->specialisation_id==$specialisation->id?"selected":''}}>
+                <option value="{{$specialisation->id}}"
+                    {{$personnages->specialisation_id==$specialisation->id?"selected":''}}>
                     {{$specialisation->nom_specialisation}}</option>
                 @endif
                 @endforeach
@@ -68,7 +68,7 @@
 
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Envoyer</button>
-                <a  href="{{route('personnage.index')}}" class="btn btn-danger">Annuler</a>
+                <a href="{{route('personnage.index')}}" class="btn btn-danger">Annuler</a>
             </div>
         </form>
     </div>

@@ -16,7 +16,6 @@ class CreateClassesTable extends Migration
         Schema::create('classes', function (Blueprint $table) {
             $table->id();
             $table->string('nom_classe');
-            $table->string('proprietes');
             $table->string('armure');
             $table->bigInteger('point_de_vie');
             $table->timestamps();
