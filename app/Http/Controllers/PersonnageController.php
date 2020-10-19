@@ -5,16 +5,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Personnage;
 use App\Models\Classe;
 use App\Models\Specialisation;
-use App\Http\Classes\Chasseur;
-use App\Http\Classes\Guerrier;
-use App\Http\Classes\Mage;
-use App\Http\Classes\Pretre;
 use Illuminate\Http\Request;
 
 class PersonnageController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Afficher la liste des personnages
      *
      * @return \Illuminate\Http\Response
      */
@@ -28,7 +24,14 @@ class PersonnageController extends Controller
 
     }
 
-    public static function couleurTom($personnage){
+    /**
+     * Changer la couleur des pseudo des personnages appartenant au propriétaire Tom
+     * Si autre propriétaire afficher les pseudo simplement
+     *
+     * @param [type] $personnage
+     * @return void
+     */
+    public static function couleurPseudo($personnage){
         if($personnage->proprietaire == 'Tom'){
             $Nstring = str_split ($personnage->pseudo,1);
             foreach ($Nstring as $value) {
@@ -40,6 +43,12 @@ class PersonnageController extends Controller
         }
     }
 
+    /**
+     * Boucle permettant d'acceder aux données des classes du fichier Classes (classes des personnages)
+     *
+     * @param [type] $personnages
+     * @return void
+     */
     public function donneeClasse($personnages){
         foreach ($personnages as $personnage) {
             $classe = $personnage->specialisation->classe->nom_classe;
@@ -50,12 +59,22 @@ class PersonnageController extends Controller
         return $personnages;
     }
 
+    /**
+     * Triage par Classe
+     *
+     * @return void
+     */
     public function tpc(){
         $personnages = Personnage::with('specialisation')->join('specialisations', 'personnages.specialisation_id', '=', 'specialisations.id')->orderBy('classe_id')->get();
         $personnages = $this->donneeClasse($personnages);
         return view('accueil',['personnages'=>$personnages]);
     }
 
+    /**
+     * Triage par Spécialisation
+     *
+     * @return void
+     */
     public function tps(){
         $personnages = Personnage::with('specialisation')->orderBy('specialisation_id')->get();
         $personnages = $this->donneeClasse($personnages);
@@ -63,7 +82,7 @@ class PersonnageController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Renvoie la vue du formulaire de création d'un personnage
      *
      * @return \Illuminate\Http\Response
      */
@@ -76,7 +95,7 @@ class PersonnageController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Insertion d'un personnage en base de données grâce aux données récupérées par la requête
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -93,18 +112,7 @@ class PersonnageController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Personnage  $personnage
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Personnage $personnage)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     *  Renvoie la vue du formulaire de modification d'un personnage
      *
      * @param  \App\Models\Personnage  $personnage
      * @return \Illuminate\Http\Response
@@ -118,7 +126,7 @@ class PersonnageController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Modification d'un personnage en base de données grâce aux données récupérées par la requête
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Personnage  $personnage
@@ -136,7 +144,7 @@ class PersonnageController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Supprime un personnage
      *
      * @param  \App\Models\Personnage  $personnage
      * @return \Illuminate\Http\Response

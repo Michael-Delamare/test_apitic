@@ -1,0 +1,11 @@
+
+.boutonAtt{
+    display: flex;
+    justify-content: space-around;
+    margin: 5px;
+}
+
+.btnAction{
+    color: black;
+    width: 100%;
+}

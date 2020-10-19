@@ -15,13 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route Page d'accueil :
 Route::get('/', function () {
     return redirect()->route('personnage.index');
 });
 
+// Routes du Controller Personnage :
 Route::resource('/personnage', PersonnageController::class);
 Route::get('/tri_par_classe',[PersonnageController::class, 'tpc'])->name('personnage.tpc');
 Route::get('/tri_par_specialisation',[PersonnageController::class, 'tps'])->name('personnage.tps');
+
+// Routes du Controller Classe :
 Route::resource('/classe', ClasseController::class);
+
+// Routes du Controller Spécialisation :
 Route::resource('/specialisation', SpecialisationController::class);
 Route::get('/selecteur/specialisation', [SpecialisationController::class, 'changeSelecteur']);
